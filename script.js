@@ -1,5 +1,6 @@
 const button = document.getElementById('button');
 const audioElement = document.getElementById('audio');
+const fact = document.getElementById('factButton');
 
 // VoiceRSS Javascript SDK
 const VoiceRSS = {
@@ -112,10 +113,10 @@ const toggleButton = () => {
 };
 
 // joke to voice
-const tellMe = (joke) => {
+const tellMe = (info) => {
 	VoiceRSS.speech({
 		key: 'd69b5658acb346f799a142091985bfe7',
-		src: joke,
+		src: info,
 		hl: 'en-us',
 		r: 0,
 		c: 'mp3',
@@ -145,6 +146,22 @@ const getJokes = async () => {
 	}
 };
 
-// joke call with button
+const getAdvice = async () => {
+	const apiUrl = 'https://api.adviceslip.com/advice';
+	try {
+		const response = await fetch(apiUrl);
+		const data = await response.json();
+		let advice = data.slip.advice;
+		tellMe(advice);
+		toggleButton();
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+getAdvice();
+
+// joke and fact call with button
 button.addEventListener('click', getJokes);
+fact.addEventListener('click', getAdvice);
 audioElement.addEventListener('ended', toggleButton);
