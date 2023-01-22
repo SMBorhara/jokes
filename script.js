@@ -108,9 +108,9 @@ const VoiceRSS = {
 };
 
 // button disabled enabled
-const toggleButton = () => {
-	button.disabled = !button.disabled;
-};
+// const toggleButton = () => {
+// 	button.disabled = !button.disabled;
+// };
 
 // joke to voice
 const tellMe = (info) => {
@@ -140,7 +140,6 @@ const getJokes = async () => {
 			joke = data.joke;
 		}
 		tellMe(joke);
-		toggleButton();
 	} catch (error) {
 		console.log(error);
 	}
@@ -153,7 +152,6 @@ const getAdvice = async () => {
 		const data = await response.json();
 		let advice = data.slip.advice;
 		tellMe(advice);
-		toggleButton();
 	} catch (error) {
 		console.log(error);
 	}
@@ -164,4 +162,4 @@ getAdvice();
 // joke and fact call with button
 button.addEventListener('click', getJokes);
 fact.addEventListener('click', getAdvice);
-audioElement.addEventListener('ended', toggleButton);
+// audioElement.addEventListener('ended', toggleButton);
